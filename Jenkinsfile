@@ -20,9 +20,9 @@ pipeline {
         }
 
         stage('Run Docker Container') {
-            steps {
+             steps {
                 echo '🚀 Running Docker container...'
-                bat 'docker run -d -p 5000:5000 %DOCKER_IMAGE%'
+                bat 'docker run -d -p 5001:5000 simplebackend'
             }
         }
     }
