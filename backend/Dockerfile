@@ -1,12 +1,9 @@
-FROM node:22.15.0
+FROM node:18
 
 WORKDIR /app
-
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
-
+RUN npm install
 COPY . .
 
 EXPOSE 5000
-
-CMD ["node", "app.js"]
+CMD ["node", "index.js"]

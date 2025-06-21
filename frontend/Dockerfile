@@ -1,4 +1,14 @@
-# Use a lightweight web server image
+FROM node:18
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+RUN npm run build
+
+# Serve using nginx
 FROM nginx:alpine
-# Copy everything in current frontend folder to Nginx's default root folder
-COPY . /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

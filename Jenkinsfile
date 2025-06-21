@@ -8,17 +8,12 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build and Run using Docker Compose') {
             steps {
-                echo '🔧 Building Docker image...'
-                bat 'docker build -t simplebackend ./backend'
-            }
-        }
-
-        stage('Run Docker Container') {
-            steps {
-                echo '🚀 Running Docker container...'
-                bat 'docker run -d -p 5002:5000 simplebackend'
+                echo '🔧 Building & Running containers...'
+                bat 'docker-compose down'
+                bat 'docker-compose build'
+                bat 'docker-compose up -d'
             }
         }
     }
