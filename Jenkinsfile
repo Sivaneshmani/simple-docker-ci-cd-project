@@ -8,9 +8,19 @@ pipeline {
             }
         }
 
+        stage('Create Secure .env file') {
+            steps {
+                withCredentials([string(credentialsId: 'backend-port', variable: 'BACKEND_PORT')]) {
+                    writeFile file: 'backend/.env', text: """
+PORT=${BACKEND_PORT}
+NODE_ENV=production
+"""
+                }
+            }
+        }
+
         stage('Build and Run using Docker Compose') {
             steps {
-                echo '🔧 Building & Running containers...'
                 bat 'docker-compose down'
                 bat 'docker-compose build'
                 bat 'docker-compose up -d'
