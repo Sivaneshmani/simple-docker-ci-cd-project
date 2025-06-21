@@ -25,7 +25,7 @@ pipeline {
                 bat '''
                 docker stop simple_container || exit 0
                 docker rm simple_container || exit 0
-                docker run -d -p 5001:5000 --name simple_container simplebackend
+                docker run -d -p 5002:5000 --name simple_container simplebackend
                 '''
             }
         }
