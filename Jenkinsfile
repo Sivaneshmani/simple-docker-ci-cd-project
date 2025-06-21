@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Sivaneshmani/simple-docker-ci-cd-project.git'
+                git branch: 'main', url: 'https://github.com/Sivaneshmani/simple-docker-ci-cd-project.git'
             }
         }
 
@@ -18,7 +18,6 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 echo '🚀 Running Docker container...'
-                // 👇 Change port 5001 to 5002 or another unused port
                 bat 'docker run -d -p 5002:5000 simplebackend'
             }
         }
